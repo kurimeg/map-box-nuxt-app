@@ -1,15 +1,32 @@
 <template>
-  <v-layout>
-    <v-flex text-xs-center>
-      <img src="/v.png" alt="Vuetify.js" class="mb-5" />
-      <blockquote class="blockquote">
-        &#8220;First, solve the problem. Then, write the code.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;John Johnson</em>
-          </small>
-        </footer>
-      </blockquote>
-    </v-flex>
-  </v-layout>
+  <MglMap
+    :accessToken="accessToken"
+    :mapStyle="mapStyle"
+    :center="center"
+    :zoom="zoom"
+  />
 </template>
+
+<script>
+import Mapbox from 'mapbox-gl'
+import { MglMap } from 'vue-mapbox'
+
+export default {
+  components: {
+    MglMap
+  },
+  data() {
+    return {
+      accessToken: '',
+      mapStyle: 'mapbox://styles/mapbox/streets-v11',
+      center: [139.767125, 35.681236],
+      zoom: 9
+    }
+  },
+
+  created() {
+    // We need to set mapbox-gl library here in order to use it in template
+    this.mapbox = Mapbox
+  }
+}
+</script>
